@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">PortfolioShare</string>
+    <string name="service_description">NFC Portfolio Link Emulation Service</string>
+    <string name="aid_description">NDEF Application ID for Link Sharing</string>
+</resources>
