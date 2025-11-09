@@ -60,7 +60,7 @@ When another NFC-enabled device (like a smartphone) comes near, it “reads” t
    ```bash
    git clone https://github.com/namdpran8/Portfolio-Share.git
    cd Portfolio-Share
-````
+
 
 2. **Open in Android Studio**
 
@@ -118,7 +118,6 @@ Here are some potential enhancements:
 | **NDEF Message**                 | The data payload that holds the shared URL or text                         |
 | **Type 4 Tag**                   | NFC tag specification used for data exchange between devices               |
 
----
 
 ## 🧰 Requirements
 
@@ -126,7 +125,6 @@ Here are some potential enhancements:
 * NFC-enabled Android device
 * Android Studio (latest stable version)
 
----
 
 ## 🧑‍💻 Author
 
@@ -135,26 +133,11 @@ Here are some potential enhancements:
 If you found this project useful, please ⭐ **star** the repository — it helps a lot!
 Feel free to fork and experiment with your own HCE-based ideas.
 
----
 
 ## 📜 License
 
 This project is licensed under the **MIT License** — see the [LICENSE](LICENSE) file for details.
 
----
 
-````
-
----
-
-### ✅ How to Use It:
-1. Copy this entire block and paste it into a new file named `README.md` in your project root.  
-2. Add your app screenshot as `screenshot.png` (or any name you prefer).  
-3. Commit and push it:
-   ```bash
-   git add README.md screenshot.png
-   git commit -m "Added professional project README"
-   git push origin main
-````
 
 
