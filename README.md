@@ -16,9 +16,6 @@ Just save your link, and tap your phone to another NFC-enabled device to send it
 
 ## 🖼️ App Screenshot  
 
-*(Add your app’s main screen here!)*  
-![App Screenshot](screenshot.png)
-
 ---
 
 ## 🚀 About This Project  
