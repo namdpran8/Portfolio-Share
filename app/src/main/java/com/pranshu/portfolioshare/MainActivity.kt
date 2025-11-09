@@ -1,73 +1,58 @@
 package com.pranshu.portfolioshare
 
 import android.content.Context
-import android.content.SharedPreferences
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 
+import com.pranshu.portfolioshare.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
 
-    // Declare UI elements as lateinit to initialize them later in onCreate
-    private lateinit var urlInput: EditText
-    private lateinit var saveButton: Button
-    private lateinit var statusTextView: TextView
-    private lateinit var prefs: SharedPreferences // SharedPreferences for persistent storage
+    private lateinit var binding: ActivityMainBinding
 
+    // Companion object to hold constants that can be accessed from other classes (like our HceService)
     companion object {
-        private const val TAG = "MainActivity" // Tag for logging purposes
-        const val PREFS_NAME = "NFC_PREFS" // Name for the SharedPreferences file
-        const val KEY_URL = "url" // Key for storing/retrieving the URL in SharedPreferences
+        const val PREFS_NAME = "sharedPrefs"
+        const val PREF_KEY_URL = "STRING_KEY"
+        const val TAG = "MainActivity"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main) // Set the layout for this activity
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        // Log that the app has started and UI setup is beginning
-        Log.d(TAG, "App started - setting up UI elements")
+        loadData()
 
-        // Initialize UI elements by finding them by their IDs in the layout
-        urlInput = findViewById(R.id.urlInput)
-        saveButton = findViewById(R.id.saveButton)
-        statusTextView = findViewById(R.id.statusTextView)
-
-        // Initialize SharedPreferences to store and retrieve the URL
-        prefs = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
-
-        // Load the previously saved URL from SharedPreferences
-        // If no URL is found, use a default example link
-        val savedUrl = prefs.getString(KEY_URL, "https://www.example.com/default-link")
-        // Log the loaded URL for debugging
-        Log.d(TAG, "Loaded saved URL: $savedUrl")
-        // Set the loaded URL to the EditText field
-        urlInput.setText(savedUrl)
-
-        // Update status text
-        statusTextView.text = "Current HCE Link: $savedUrl\n\n" +
-                "To share, bring another NFC-enabled device close to this phone.\n" +
-                "Ensure NFC is enabled and screen is unlocked."
-
-        saveButton.setOnClickListener {
-            val url = urlInput.text.toString().trim()
-            if (url.isNotEmpty()) {
-                prefs.edit().putString(KEY_URL, url).apply()
-                Log.d(TAG, "Saved new URL to SharedPreferences: $url")
-
-                // Update status text with new URL
-                statusTextView.text = "Current HCE Link: $url\n\n" +
-                        "To share, bring another NFC-enabled device close to this phone.\n" +
-                        "Ensure NFC is enabled and screen is unlocked."
-
-                Toast.makeText(this, "Link saved successfully! HCE service will use this.", Toast.LENGTH_LONG).show()
-            } else {
-                Log.w(TAG, "Empty URL entered - not saving")
-                Toast.makeText(this, "Please enter a valid URL", Toast.LENGTH_SHORT).show()
-            }
+        binding.saveButton.setOnClickListener {
+            saveData()
         }
+    }
+
+    private fun saveData() {
+        val insertedText = binding.urlInput.text.toString().trim()
+
+        // Basic validation to ensure it's a plausible URL
+        if (insertedText.isNotEmpty() && android.util.Patterns.WEB_URL.matcher(insertedText).matches()) {
+            val sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+            val editor = sharedPreferences.edit()
+            editor.putString(PREF_KEY_URL, insertedText)
+            editor.apply() // apply() saves the data in the background
+
+            Toast.makeText(this, "URL Saved!", Toast.LENGTH_SHORT).show()
+            Log.d(TAG, "Saved URL: $insertedText")
+        } else {
+            Toast.makeText(this, "Please enter a valid URL.", Toast.LENGTH_LONG).show()
+            Log.w(TAG, "Invalid URL entered: $insertedText")
+        }
+    }
+
+    private fun loadData() {
+        val sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+        // Load the saved URL, providing a default value if nothing is saved yet
+        val savedString = sharedPreferences.getString(PREF_KEY_URL, "https://github.com/namdpran8")
+        binding.urlInput.setText(savedString)
+        Log.d(TAG, "Loaded URL: $savedString")
     }
 }
