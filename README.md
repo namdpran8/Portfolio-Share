@@ -2,7 +2,7 @@ Portfolio Share (NFC-HCE)
 
 A simple Android application that uses Host Card Emulation (HCE) to share a portfolio link (or any URL) via NFC. Just save your link, and tap your phone to another NFC-enabled device to send it!
 
-![Screenshot_20251110_012406_PortfolioShare](https://github.com/user-attachments/assets/7258ad08-a215-49d1-8c6e-b45f765b9af4)
+
 
 
 🚀 About This Project
