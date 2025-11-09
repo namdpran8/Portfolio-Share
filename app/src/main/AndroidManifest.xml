@@ -5,7 +5,19 @@
 
     <!-- NFC permissions -->
     <uses-permission android:name="android.permission.NFC" />
+
+    <!--
+      Declare that this app requires NFC.
+      This is good, but for HCE we also need the nfc.hce feature.
+    -->
     <uses-feature android:name="android.hardware.nfc" android:required="true" />
+
+    <!--
+      FIX #1: Added the HCE feature requirement.
+      This tells the system and the Play Store that HCE is mandatory for this app.
+    -->
+    <uses-feature android:name="android.hardware.nfc.hce" android:required="true" />
+
 
     <application
         android:allowBackup="true"
@@ -30,9 +42,13 @@
             </intent-filter>
         </activity>
 
-
+        <!--
+          FIX #2: Changed android:name to ".HceService"
+          This now correctly points to your "class HceService"
+          (The file name "MyHostApduService.kt" doesn't matter, only the class name)
+        -->
         <service
-            android:name="MyHostApduService"
+            android:name=".HceService"
             android:permission="android.permission.BIND_NFC_SERVICE"
             android:exported="true">
             <intent-filter>
@@ -42,7 +58,6 @@
                 android:name="android.nfc.cardemulation.host_apdu_service"
                 android:resource="@xml/apduservice" />
         </service>
-
 
     </application>
 </manifest>

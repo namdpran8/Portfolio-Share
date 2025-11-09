@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<host-apdu-service xmlns:android="[http://schemas.android.com/apk/res/android](http://schemas.android.com/apk/res/android)"
+<host-apdu-service xmlns:android="http://schemas.android.com/apk/res/android"
     android:description="@string/service_description"
-    android:requireDeviceUnlock="false"> <!-- Set to true if you want the device to be unlocked to emulate -->
+    android:requireDeviceUnlock="false">
 
-    <!-- Define the AID (Application ID) categories that this service will respond to. -->
-    <!-- IMPORTANT: This AID is the standard NDEF Application AID for NFC Forum Type 4 Tags. -->
-    <!-- This is crucial for generic Android NFC readers to recognize your HCE service as an NDEF tag. -->
-    <aid-group android:description="@string/aid_description" android:category="other">
+    <!--
+        This AID 'D2760000850101' is the standard NDEF Application AID.
+        It tells NFC readers that your app is emulating a standard NDEF tag.
+    -->
+    <aid-group android:description="@string/aid_description"
+        android:category="android.nfc.cardemulation.category.OTHER">
         <aid-filter android:name="D2760000850101" />
     </aid-group>
 
