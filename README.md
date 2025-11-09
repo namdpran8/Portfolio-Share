@@ -1,9 +1,5 @@
-Perfect 😎 — here’s your **complete, professional-quality GitHub `README.md`** in full Markdown (ready to copy-paste directly into your repo).
-It includes badges, structure, syntax highlighting, and a clean developer profile footer.
 
----
 
-````markdown
 # 📱 Portfolio Share (NFC-HCE)
 
 [![Made with Kotlin](https://img.shields.io/badge/Made%20with-Kotlin-7F52FF?logo=kotlin&logoColor=white)](https://kotlinlang.org/)
@@ -161,6 +157,4 @@ This project is licensed under the **MIT License** — see the [LICENSE](LICENSE
    git push origin main
 ````
 
----
 
-Would you like me to generate a **MIT License** file too (`LICENSE.md`) so your GitHub repo looks fully professional and open-source-ready?
